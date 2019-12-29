@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  user = "";
+  password = "";
   constructor() { }
 
   ngOnInit() {
+  }
+
+  login() {
+    if (this.user === 'admin' && this.password === 'admin') {
+      console.log("Redirect to ");
+    }
   }
 
 }

@@ -1,1 +1,34 @@
-<p>login works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="jumbotron">
+                <h1 class="display-4">Wellcome to Vendei!</h1>
+                <p class="lead">Register your user and start to sell your products.</p>
+                <hr class="my-4">
+                <p>It is a very good choose to handle your shopping.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Register</a>
+            </div>
+        </div>
+        <div class="col6">
+            <div class="login-form">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" [(ngModel)]="user" class="form-control" placeholder="Username" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password" aria-label="Password"
+                        aria-describedby="basic-addon1">
+                </div>
+                <button class="btn btn-primary" (click)="login()">Login</button>
+
+            </div>
+        </div>
+    </div>
+</div>
