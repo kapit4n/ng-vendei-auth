@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-auth-user-profile',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthUserProfileComponent implements OnInit {
 
-  constructor() { }
+  id = 0;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get("id"));
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-auth-user-list',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthUserListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   users = [{ id: 1, name: "Luis Arce" }, { id: 2, name: "Sam" }, { id: 3, name: "Hans" }]
 
@@ -15,7 +16,7 @@ export class AuthUserListComponent implements OnInit {
   }
 
   selectUser(user) {
-    console.log(`Open ${user.name}`)
+    this.router.navigate(['/users/' + user.id]);
   }
 
 }
