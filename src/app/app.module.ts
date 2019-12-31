@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AConfigService } from './services/auth/a-config.service'
+import { ALoginService } from './services/auth/a-login.service'
 import { AUsersService } from './services/auth/a-users.service'
 
 @NgModule({
@@ -31,7 +32,7 @@ import { AUsersService } from './services/auth/a-users.service'
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [AConfigService, AUsersService],
+  providers: [AConfigService, AUsersService, ALoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
