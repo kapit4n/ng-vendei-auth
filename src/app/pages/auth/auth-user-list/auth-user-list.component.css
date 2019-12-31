@@ -1,0 +1,10 @@
+.item-container {
+    display: flex; 
+    border-bottom-width: 1px; 
+    border-bottom-style: solid;
+    width: 100%;
+}
+
+.item-container:hover {
+    background: lightgray;
+}

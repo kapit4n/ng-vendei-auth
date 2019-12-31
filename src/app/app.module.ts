@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,9 @@ import { AuthUserProfileComponent } from './pages/auth/auth-user-profile/auth-us
 import { AuthUserCreateComponent } from './pages/auth/auth-user-create/auth-user-create.component';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AConfigService } from './services/auth/a-config.service'
+import { AUsersService } from './services/auth/a-users.service'
 
 @NgModule({
   declarations: [
@@ -24,9 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     MatListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AConfigService, AUsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
