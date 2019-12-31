@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AUsersService } from "../../../services/auth/a-users.service";
+
+interface UserInfo {
+  name: string;
+  img: string;
+  id: string;
+}
 
 @Component({
   selector: 'app-auth-user-profile',
@@ -8,11 +15,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AuthUserProfileComponent implements OnInit {
 
-  id = 0;
-  constructor(private route: ActivatedRoute) { }
+  id = "";
+  userInfo: UserInfo = {} as UserInfo;
+  constructor(private route: ActivatedRoute, private usersSvc: AUsersService) { }
 
   ngOnInit() {
-    this.id = Number.parseInt(this.route.snapshot.paramMap.get("id"));
+    this.id = this.route.snapshot.paramMap.get("id");
+    this.usersSvc.getById(this.id).subscribe(userInfo => {
+      this.userInfo = userInfo;
+    })
   }
 
 }
