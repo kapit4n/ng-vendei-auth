@@ -14,6 +14,13 @@ interface User {
   providedIn: 'root'
 })
 export class AUsersService {
+  update(value: any): Observable<any> {
+    return this.http.put(`${this.modelUrl}?access_token=${localStorage.getItem('access_token')}`, value)
+
+  }
+  register(value: any): Observable<any> {
+    return this.http.post(`${this.modelUrl}`, value);
+  }
   modelUrl: string;
 
   constructor(private http: HttpClient, private configSvc: AConfigService) {

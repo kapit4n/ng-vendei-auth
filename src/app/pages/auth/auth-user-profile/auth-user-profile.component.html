@@ -1,12 +1,45 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <img [src]="userInfo.img" />
+            <img
+                [src]="userInfo.img || 'https://thumb7.shutterstock.com/thumb_large/3736355/1229876221/stock-vector-woman-avatar-default-anonymous-user-picture-profile-placeholder-icon-girl-no-photo-sign-vector-1229876221.jpg'" />
         </div>
-        <div class="col">
+        <div class="col" *ngIf="!edit">
             <h1>The rock</h1>
-            <p>Biography: {{id}}</p>
-
+            <p>UserName: {{userInfo.username}}</p>
+            <p>Email: {{userInfo.email}}</p>
+            <p>Id: {{userInfo.id}}</p>
+            <button class="btn btn-primary" (click)="editIt()">Edit</button>
         </div>
+        
+        <div class="col" *ngIf="edit">
+            <form [formGroup]="registerForm" (ngSubmit)="save()">
+                <div class="form-group">
+                    <label for="realm">Real M</label>
+                    <input type="text" formControlName="realm" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && f.realm.errors}" />
+                    <div *ngIf="submitted && f.realm.errors" class="invalid-feedback">
+                        <div *ngIf="f.realm.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="img">Img</label>
+                    <input type="img" formControlName="img" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.img.errors }" />
+                    <div *ngIf="submitted && f.img.errors" class="invalid-feedback">
+                        <div *ngIf="f.img.errors.required">img is required</div>
+                        <div *ngIf="f.img.errors.minlength">img must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <a routerLink="/login" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>

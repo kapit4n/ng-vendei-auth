@@ -11,18 +11,20 @@ export class LoginComponent implements OnInit {
 
   user = "";
   password = "";
-  constructor(private router: Router, private loginSvc: ALoginService) { }
+  constructor(
+    private router: Router,
+    private loginSvc: ALoginService
+    ) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.loginSvc.login({ userName: this.user, password: this.password }).subscribe(res => {
+    this.loginSvc.login({ email: this.user, password: this.password }).subscribe(res => {
       console.log(res);
+      localStorage.setItem('access_token', res.id)
+      this.router.navigate(['/users']);
     })
-    if (this.user === 'admin' && this.password === 'admin') {
-    }
-    this.router.navigate(['/users']);
   }
 
 }

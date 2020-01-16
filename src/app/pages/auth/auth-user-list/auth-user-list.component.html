@@ -1,5 +1,7 @@
 <mat-list>
   <mat-list-item *ngFor="let user of users" (click)="selectUser(user)" class="item-container">
-    <img [src]="user.img" height="40" /> {{user.name}}
+    <img
+      [src]="user.img || 'https://thumb7.shutterstock.com/thumb_large/3736355/1229876221/stock-vector-woman-avatar-default-anonymous-user-picture-profile-placeholder-icon-girl-no-photo-sign-vector-1229876221.jpg'"
+      height="40" /> {{user.email}} {{user.username}} {{user.id}}
   </mat-list-item>
 </mat-list>

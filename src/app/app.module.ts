@@ -11,10 +11,14 @@ import { AuthUserProfileComponent } from './pages/auth/auth-user-profile/auth-us
 import { AuthUserCreateComponent } from './pages/auth/auth-user-create/auth-user-create.component';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AConfigService } from './services/auth/a-config.service'
 import { ALoginService } from './services/auth/a-login.service'
 import { AUsersService } from './services/auth/a-users.service'
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/auth/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { AUsersService } from './services/auth/a-users.service'
     FormsModule,
     MatListModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AConfigService, AUsersService, ALoginService],
   bootstrap: [AppComponent]
