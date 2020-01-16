@@ -1,34 +1,47 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <img
-                [src]="userInfo.img || 'https://thumb7.shutterstock.com/thumb_large/3736355/1229876221/stock-vector-woman-avatar-default-anonymous-user-picture-profile-placeholder-icon-girl-no-photo-sign-vector-1229876221.jpg'" />
+            <img style="width: 20rem;"
+                [src]="user['user-infos'] ? this.user['user-infos'].img : 'https://thumb7.shutterstock.com/thumb_large/3736355/1229876221/stock-vector-woman-avatar-default-anonymous-user-picture-profile-placeholder-icon-girl-no-photo-sign-vector-1229876221.jpg'" />
         </div>
         <div class="col" *ngIf="!edit">
-            <h1>The rock</h1>
-            <p>UserName: {{userInfo.username}}</p>
-            <p>Email: {{userInfo.email}}</p>
-            <p>Id: {{userInfo.id}}</p>
+            <p>UserName: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Img: {{user['user-infos'] ? this.user['user-infos'].img : ''}}</p>
+            <p>Address: {{user['user-infos'] ? this.user['user-infos'].address : ''}}</p>
+            <p>Biography: {{user['user-infos'] ? this.user['user-infos'].biograhpy : ''}}</p>
             <button class="btn btn-primary" (click)="editIt()">Edit</button>
         </div>
-        
+
         <div class="col" *ngIf="edit">
-            <form [formGroup]="registerForm" (ngSubmit)="save()">
-                <div class="form-group">
-                    <label for="realm">Real M</label>
-                    <input type="text" formControlName="realm" class="form-control"
-                        [ngClass]="{'is-invalid': submitted && f.realm.errors}" />
-                    <div *ngIf="submitted && f.realm.errors" class="invalid-feedback">
-                        <div *ngIf="f.realm.errors.required">First Name is required</div>
-                    </div>
-                </div>
+            <form [formGroup]="userInfoForm" (ngSubmit)="save()">
                 <div class="form-group">
                     <label for="img">Img</label>
-                    <input type="img" formControlName="img" class="form-control"
+                    <input type="text" formControlName="img" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.img.errors }" />
                     <div *ngIf="submitted && f.img.errors" class="invalid-feedback">
                         <div *ngIf="f.img.errors.required">img is required</div>
                         <div *ngIf="f.img.errors.minlength">img must be at least 6 characters</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" formControlName="address" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">address is required</div>
+                        <div *ngIf="f.address.errors.minlength">address must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="biography">Biography</label>
+                    <textarea rows="4" cols="60" formControlName="biography" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.biography.errors }">
+                    </textarea>
+                    <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
+                        <div *ngIf="f.biography.errors.required">biography is required</div>
+                        <div *ngIf="f.biography.errors.minlength">biography must be at least 6 characters</div>
                     </div>
                 </div>
                 <div class="form-group">

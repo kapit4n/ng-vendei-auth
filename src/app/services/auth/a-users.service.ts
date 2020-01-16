@@ -14,17 +14,19 @@ interface User {
   providedIn: 'root'
 })
 export class AUsersService {
-  update(value: any): Observable<any> {
-    return this.http.put(`${this.modelUrl}?access_token=${localStorage.getItem('access_token')}`, value)
+  updateInfo(value: any): Observable<any> {
+    return this.http.post(`${this.infoUrl}?access_token=${localStorage.getItem('access_token')}`, value)
 
   }
   register(value: any): Observable<any> {
     return this.http.post(`${this.modelUrl}`, value);
   }
   modelUrl: string;
+  infoUrl: string;
 
   constructor(private http: HttpClient, private configSvc: AConfigService) {
     this.modelUrl = this.configSvc.baseUrl + "/users";
+    this.infoUrl = this.configSvc.baseUrl + "/user-infos";
   }
 
   getAll(): Observable<any> {
@@ -32,7 +34,7 @@ export class AUsersService {
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get(`${this.modelUrl}/${id}`);
+    return this.http.get(`${this.modelUrl}/${id}?filter[include]=user-infos`);
   }
 
 }

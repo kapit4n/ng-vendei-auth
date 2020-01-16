@@ -6,10 +6,17 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 interface UserInfo {
+  address: string;
+  img: string;
+  biography: string;
+}
+
+interface User {
   username: string;
   email: string;
   img: string;
   id: string;
+  'user-infos': UserInfo
 }
 
 @Component({
@@ -21,10 +28,11 @@ export class AuthUserProfileComponent implements OnInit {
 
   id = "";
   edit = false;
+  user: User = {} as User;
   userInfo: UserInfo = {} as UserInfo;
 
   error: string;
-  registerForm: FormGroup;
+  userInfoForm: FormGroup;
   loading = false;
   submitted = false;
 
@@ -36,25 +44,25 @@ export class AuthUserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id");
-    this.usersSvc.getById(this.id).subscribe(userInfo => {
-      this.userInfo = userInfo;
-      this.registerForm = this.formBuilder.group({
-        realm: [userInfo.realm, Validators.required],
-        email: [userInfo.email, Validators.required],
-        username: [userInfo.username, Validators.required],
-        password: [userInfo.password, [Validators.required, Validators.minLength(6)]],
-        img: [userInfo.img || ''],
+    this.usersSvc.getById(this.id).subscribe(data => {
+      this.user = data;
+      this.userInfoForm = this.formBuilder.group({
+        userId: [this.user.id, Validators.required],
+        img: [this.user['user-infos'] ? this.user['user-infos'].img : ''],
+        address: [this.user['user-infos'] ? this.user['user-infos'].address : ''],
+        biography: [this.user['user-infos'] ? this.user['user-infos'].biography : ''],
       })
     })
   }
-  get f() { return this.registerForm.controls; }
+  get f() { return this.userInfoForm.controls; }
 
   save() {
     // submit the data
     this.loading = true;
-    console.log(this.registerForm.value);
-    this.usersSvc.update(this.registerForm.value).subscribe(data => {
-      this.router.navigate(['/login'], { queryParams: { registered: true } });
+    console.log(this.userInfoForm.value);
+    this.usersSvc.updateInfo(this.userInfoForm.value).subscribe(data => {
+      console.log(data);
+      this.edit = false;
     }, error => {
       this.error = error;
       this.loading = false;
