@@ -62,6 +62,14 @@ export class AuthUserProfileComponent implements OnInit {
     console.log(this.userInfoForm.value);
     this.usersSvc.updateInfo(this.userInfoForm.value).subscribe(data => {
       console.log(data);
+      this.user['user-infos'] = { img: data.img, address: data.address, biography: data.biography };
+
+      this.userInfoForm = this.formBuilder.group({
+        userId: [this.user.id, Validators.required],
+        img: [data.img],
+        address: [data.address],
+        biography: [data.biography],
+      })
       this.edit = false;
     }, error => {
       this.error = error;
