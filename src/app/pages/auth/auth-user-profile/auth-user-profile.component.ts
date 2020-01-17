@@ -71,6 +71,7 @@ export class AuthUserProfileComponent implements OnInit {
         biography: [data.biography],
       })
       this.edit = false;
+      this.loading = false;
     }, error => {
       this.error = error;
       this.loading = false;
